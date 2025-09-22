@@ -56,6 +56,13 @@ namespace CustomGHComponents
 
             if ((!DA.GetData(0, ref connString)) || (!DA.GetData(1, ref query)) || (!DA.GetData(2, ref trigger))) return;
 
+            if (!trigger)
+            {
+                DA.SetDataList(0, new List<string>());
+                return;
+            }
+
+
             List<string> output = new List<string>();
 
             try
@@ -79,7 +86,7 @@ namespace CustomGHComponents
                 Console.WriteLine("Error: " + ex.Message);
             }
 
-            DA.SetData(0, output);
+            DA.SetDataList(0, output);
             return;
 
         }
